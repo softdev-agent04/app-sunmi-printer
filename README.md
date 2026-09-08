@@ -1,76 +1,69 @@
-# React + TypeScript + Vite
+# Sunmi Printer React Capacitor App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based mobile application designed to interface with SUNMI printer hardware using Capacitor. This app provides a dashboard to initialize, check the status of, and print test/order receipts on SUNMI POS devices.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Printer Management**: Initialize and destroy printer connections.
+- **Status Monitoring**: Real-time status checks (connectivity and readiness).
+- **Print Functionality**: 
+  - Test print capability.
+  - Formatted order receipt printing (supports Table and Takeaway order types).
+- **Activity Logging**: Built-in log viewer to debug printer interactions.
+- **Responsive UI**: A modern, styled interface for easy management.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19 + TypeScript + Vite
+- **Native Bridge**: Capacitor 6 (Android)
+- **Printer Plugin**: `@desipayments/sunmi-printer`
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (v18+)
+- Capacitor CLI installed globally (`npm install -g @capacitor/cli`)
+- Android Studio (for native Android builds)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Running in Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
-"# app-sunmi-printer" 
+
+### Building for Android
+
+1. Build the web assets:
+   ```bash
+   npm run build
+   ```
+2. Sync with Capacitor (if needed):
+   ```bash
+   npx cap sync android
+   ```
+3. Open in Android Studio:
+   ```bash
+   npx cap open android
+   ```
+
+## Project Structure
+
+- `src/App.tsx`: Main application logic, UI, and printer plugin integration.
+- `src/main.tsx`: Entry point.
+- `android/`: Native Android project files.
+- `capacitor.config.ts`: Capacitor configuration.
+
+## Usage
+
+1. **Initialization**: On launch, the app attempts to initialize the printer.
+2. **Status**: Monitor the "Printer Status" card.
+3. **Printing**: Use the "Controls" section to print test receipts or simulated order receipts. Choose between **Table ($)** and **Takeaway (৳)** order types to see different receipt formats.
+
+
